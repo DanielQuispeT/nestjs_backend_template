@@ -59,7 +59,7 @@ npm install
 #### 8. **Configurar el archivo .env:**
 
 - **Crear un archivo `.env`** si no existe.
-- **Configurar las variables de entorno** según las necesidades de tu proyecto.
+- **Copiar el contenido del archivo `.env.example`** y pegarlo en el nuevo archivo `.env`, despues modificar los valores según correspoda.
 
 #### 9. **Iniciar el proyecto:**
 
