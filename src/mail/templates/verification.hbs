@@ -1,0 +1,72 @@
+<html lang='es'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Código de verificación</title>
+    <style>
+      .wrapper { margin: 0; padding: 0; font-family: arial, helvetica,
+      sans-serif; background-color: #f1f1f1; font-size: 14px; color: #313131;
+      min-width: 300px; } .container { margin: 0 auto; max-width: 600px; }
+      .header { padding: 50px 0px; width: 100%; text-align: center; } .header a
+      { text-align: center; text-decoration: none; display: inline-block; }
+      .header a img { max-width: 100px; height: auto; display: block; margin:
+      0px; } .content { background-color: #ffffff; padding: 30px; } .saludos {
+      ext-align: center; line-height: 24px; background-color: #ffffff;
+      box-sizing: border-box; margin: 0; padding: 20px ; border-radius: 8px;}
+      .content-header { text-align: center; line-height: 24px; }
+      .content-header-p1 { font-size: 18px; font-weight: bold; }
+      .content-header-p2 { margin: 0px; } .content-header-p3 { font-size: 24px;
+      line-height: 30px; font-weight: 700; } .content-item-header { color:
+      #b2b2b2; line-height: 21px; padding: 5px 0; font-weight: 700; } .footer {
+      text-align: center; padding: 25px 0; color: #b2b2b2; font-size: 11px; }
+      .footer p { margin: 0; } .footer a { color: #b2b2b2; text-decoration:
+      underline; } .codigo-verificacion{ background: #BBE1FA; text-align:
+      center; color: #000000; padding: 1rem; border-radius: 10px; font-weight:
+      bold; font-size: 1.2rem; }
+    </style>
+  </head>
+  <body>
+    <div class='wrapper'>
+      <div class='container'>
+        <div class='header'>
+          <a href='#' target='_blank'>
+            <img src='{{logoUrl}}' alt='AÑAKI' />
+          </a>
+        </div>
+        <div class='saludos'>
+          <p>Estimado/a {{name}} {{lastName}},</p>
+          <p>
+            Gracias por registrarte en
+            <strong>Añaki</strong>. Para completar el proceso de registro y
+            garantizar la seguridad de tu cuenta, necesitamos verificar tu
+            dirección de correo electrónico.
+          </p>
+          <p>
+            Por favor, utiliza el siguiente código de verificación en el
+            formulario de confirmación:
+          </p>
+          <h2 class='codigo-verificacion'>{{codeVerification}}</h2>
+          <p>
+            Si no has solicitado este correo de verificación, por favor
+            ignóralo. Es posible que otra persona haya ingresado tu dirección de
+            correo electrónico por error. Si esto ocurre con frecuencia, ponte
+            en contacto con nuestro equipo de soporte para resolver cualquier
+            problema de seguridad.
+          </p>
+          <p>
+            Gracias por confiar en Añaki. Si tienes alguna pregunta o necesitas
+            ayuda, no dudes en ponerte en contacto con nosotros.
+          </p>
+          <p>Atentamente,</p>
+        </div>
+        <div class='footer'>
+          <p>Este correo electrónico no es monitoreado. Por favor, no respondas
+            a este mensaje.</p>
+          <p>Si necesitas asistencia, por favor contacta a nuestro equipo de
+            soporte en
+            <a href='mailto:soporte@añaki.com'>soporte@añaki.com</a>.</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

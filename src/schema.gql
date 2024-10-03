@@ -1,0 +1,346 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Credencial {
+  created_at: DateTime
+  updated_at: DateTime
+  deleted_at: DateTime
+  id: String
+  password: String
+  refreshToken: String
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Pais {
+  created_at: DateTime
+  updated_at: DateTime
+  deleted_at: DateTime
+  id: Float!
+  name: String
+  dial_code: String
+  code: String
+}
+
+type DependenciaPermiso {
+  created_at: DateTime
+  updated_at: DateTime
+  deleted_at: DateTime
+  permiso_id: String!
+  permiso_id_necesario: String!
+  permiso: Permiso!
+  permiso_necesario: Permiso!
+}
+
+type Rol {
+  created_at: DateTime
+  updated_at: DateTime
+  deleted_at: DateTime
+  id: String!
+  nombre: String!
+  descripcion: String!
+  personas_rol: [PersonaRol!]!
+  permisos_rol: [RolPermiso!]!
+}
+
+type RolPermiso {
+  created_at: DateTime
+  updated_at: DateTime
+  deleted_at: DateTime
+  id: String!
+  rol_id: String!
+  permiso_id: String!
+  rol: Rol!
+  permiso: Permiso!
+}
+
+type Permiso {
+  created_at: DateTime
+  updated_at: DateTime
+  deleted_at: DateTime
+  id: String!
+  codigo: String!
+  nombre: String!
+  descripcion: String!
+  roles_permiso: [RolPermiso!]!
+  dependencias_permiso: [DependenciaPermiso!]
+  persona_permiso_personalizado: [PersonaPermisoPersonalizado!]
+}
+
+type PermisoEnum {
+  permisos: JSONObject!
+}
+
+"""
+The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSONObject
+
+type PersonaPermisoPersonalizado {
+  created_at: DateTime
+  updated_at: DateTime
+  deleted_at: DateTime
+  id: String!
+  accion: String!
+  permiso_id: String!
+  persona_rol_id: String!
+  permiso: Permiso!
+  persona_rol: PersonaRol!
+}
+
+type PersonaRol {
+  created_at: DateTime
+  updated_at: DateTime
+  deleted_at: DateTime
+  id: String!
+  personalizado: Boolean!
+  persona_id: String!
+  rol_id: String!
+  persona: Persona!
+  rol: Rol!
+  persona_permiso_personalizado: [PersonaPermisoPersonalizado!]
+}
+
+type Persona {
+  created_at: DateTime
+  updated_at: DateTime
+  deleted_at: DateTime
+  id: String!
+  nombres: String
+  apellidos: String
+  fecha_nacimiento: DateTime
+  foto_perfil: String
+  foto_perfil_google: String
+  email: String
+  codigo_verificacion: String
+  email_verificado: Boolean
+  telefono: String
+  codigo_region: String
+  ciudad: String
+  biografia: String
+  url_linkedin: String
+  url_facebook: String
+  url_instagram: String
+  credencial: Credencial!
+  persona_roles: [PersonaRol!]
+  pais: Pais
+  pais_id: Float
+}
+
+type Archivo {
+  created_at: DateTime
+  updated_at: DateTime
+  deleted_at: DateTime
+  id: String!
+  filename: String
+  originalname: String
+  archivos_adjuntos: [ArchivoAdjunto!]!
+}
+
+type ArchivoAdjunto {
+  created_at: DateTime
+  updated_at: DateTime
+  deleted_at: DateTime
+  id: String!
+  nombre_tabla: String
+  registro_id: String
+  tipo_adjunto: String
+  archivo_id: String
+  archivo: Archivo!
+}
+
+type PersonaConRol {
+  created_at: DateTime!
+  updated_at: DateTime!
+  id: String!
+  nombres: String
+  apellidos: String
+  fecha_nacimiento: DateTime
+  foto_perfil: String
+  foto_perfil_google: String
+  email: String
+  codigo_verificacion: String
+  email_verificado: Boolean
+  telefono: String
+  codigo_region: String
+  ciudad: String
+  biografia: String
+  url_linkedin: String
+  url_facebook: String
+  url_instagram: String
+  persona_roles: PersonaRol!
+  pais: Pais
+}
+
+type ArchivoAdjuntoConArchivo {
+  archivo_adjunto: ArchivoAdjunto!
+  archivo: Archivo!
+}
+
+type Query {
+  getPersonas: [Persona!]!
+  getPersona_ById(id: String!): Persona!
+  getPersonasByEmail(email: String!): [Persona!]!
+  verifyTokenRecovery(token: String!): Persona!
+  getPesona_ByToken: Persona!
+  getRoles: [Rol!]!
+  getRol_ById(id: String!): Rol!
+  getPersonasRoles: [PersonaConRol!]!
+  getRolPermiso_ById(id: String!): RolPermiso!
+  getRolesPermisos: [RolPermiso!]!
+  getRolPermiso_ByRolId(id: String!): [RolPermiso!]!
+  getAllPaises: [Pais!]!
+  getPais_ByName(name: String!): Pais
+  getFiles_DeRegistro(nombre_tabla: String!, registro_id: String!): [ArchivoAdjunto!]!
+  getArchivosAdjuntos_ByRegistroId(registro_id: String!, nombre_tabla: String!, tipo_adjunto: String!): [ArchivoAdjuntoConArchivo!]!
+  generateHash(password: String!): String!
+  verifyToken(token: String!): String!
+  getPermisos: [Permiso!]!
+  getPermiso_ById(id: String!): Permiso!
+  getPermisos_Codigo: PermisoEnum!
+  getPermisosPersonalizados_ByPersonaRolId(persona_rol_id: String!): [PersonaPermisoPersonalizado!]!
+}
+
+type Mutation {
+  insertPersona(insertPersonaInput: InsertPersonaInput!): Persona!
+  updatePersona(updatePersonaInput: UpdatePersonaInput!): Persona!
+  removePersona(id: String!): Boolean!
+  confirmCode(email: String!, code: String!): Boolean!
+  sendLinkRecoveryAccount(email: String!): Boolean!
+  updateProfile(data: UpdateProfileInput!): Persona!
+  insertRol(data: InsertRolInput!): Rol!
+  updateRol(data: UpdateRolInput!): Rol!
+  deleteRol(id: String!): Boolean!
+  insertPersonaRol(data: InsertPersonaRolInput!): PersonaRol!
+  deletePersonaRol(persona_rol_id: String!): Boolean!
+  getPermisos_ByPersonaAndRol: [String!]!
+  insertRolPermiso(data: InsertRolPermisoInput!): RolPermiso!
+  updateRolPermiso(data: UpdateRolPermisoInput!): RolPermiso!
+  deleteRolPermiso(id: String!): Boolean!
+  saveFiles_DeRegistro(registro_id: String!, nombre_tabla: String!, files_ids: [String!]!): [ArchivoAdjunto!]!
+  insertCredencial(persona_id: String!, password: String!): Boolean!
+  createAccountUser(createAccountInput: CreateAccountInput!): Boolean!
+  updateCredentials(password: String!, token: String!): Boolean!
+  updatePasswordUser(passwordNew: String!, passwordCurrent: String): Boolean!
+  insertPermiso(data: InsertPermisoInput!): Permiso!
+  updatePermiso(data: UpdatePermisoInput!): Permiso!
+  deletePermiso(id: String!): Boolean!
+  insertManyPersonaPermisosPersonalizado(data: [InsertPersonaPermisosPersonalizadoInput!]!): [PersonaPermisoPersonalizado!]!
+}
+
+input InsertPersonaInput {
+  nombres: String
+  apellidos: String
+  fecha_nacimiento: DateTime
+  email: String
+  telefono: String
+  codigo_region: String
+  pais_id: Float
+  ciudad: String
+  biografia: String
+  url_linkedin: String
+  url_facebook: String
+  url_instagram: String
+  password: String
+  foto_perfil_google: String
+  email_verificado: Boolean
+}
+
+input UpdatePersonaInput {
+  nombres: String
+  apellidos: String
+  fecha_nacimiento: DateTime
+  email: String
+  telefono: String
+  codigo_region: String
+  pais_id: Float
+  ciudad: String
+  biografia: String
+  url_linkedin: String
+  url_facebook: String
+  url_instagram: String
+  password: String
+  foto_perfil_google: String
+  email_verificado: Boolean
+  id: String
+}
+
+input UpdateProfileInput {
+  nombres: String
+  apellidos: String
+  fecha_nacimiento: DateTime
+  email: String
+  telefono: String
+  codigo_region: String
+  pais_id: Float
+  ciudad: String
+  biografia: String
+  url_linkedin: String
+  url_facebook: String
+  url_instagram: String
+  foto_perfil: String
+  foto_perfil_id: String
+}
+
+input InsertRolInput {
+  """Nombre del rol"""
+  nombre: String!
+
+  """Descripción del rol"""
+  descripcion: String!
+}
+
+input UpdateRolInput {
+  """Id del rol"""
+  id: String!
+
+  """Nombre del rol"""
+  nombre: String!
+
+  """Descripción del rol"""
+  descripcion: String!
+}
+
+input InsertPersonaRolInput {
+  persona_id: String!
+  rol_id: String!
+}
+
+input InsertRolPermisoInput {
+  rol_id: String!
+  permiso_id: String!
+}
+
+input UpdateRolPermisoInput {
+  rol_id: String!
+  permiso_id: String!
+  id: String!
+}
+
+input CreateAccountInput {
+  password: String
+  persona: InsertPersonaInput!
+}
+
+input InsertPermisoInput {
+  nombre: String!
+  descripcion: String!
+  permisos_id_necesarios: [String!]!
+}
+
+input UpdatePermisoInput {
+  nombre: String!
+  descripcion: String!
+  permisos_id_necesarios: [String!]!
+  id: String!
+}
+
+input InsertPersonaPermisosPersonalizadoInput {
+  accion: String!
+  permiso_id: String!
+  persona_rol_id: String!
+}
