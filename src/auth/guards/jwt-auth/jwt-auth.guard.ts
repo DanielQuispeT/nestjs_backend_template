@@ -11,7 +11,7 @@ import { TokenExpiredError } from '@nestjs/jwt';
 import { AuthGuard } from '@nestjs/passport';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/auth/auth.service';
-import { IS_PUBLIC_KEY } from 'src/common/decorators/key-decorators.constant';
+import { IS_PUBLIC_KEY } from 'src/common/constants/key-decorators.constant';
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {

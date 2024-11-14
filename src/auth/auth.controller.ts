@@ -173,14 +173,16 @@ export class AuthController {
   @Get('google/callback')
   async googleRegisterOrLogin(@Req() req: Request, @Res() res: Response) {
     const profileData = req.user as any;
-    if (!profileData || !profileData.email)
+    if (!profileData || !profileData.email) {
       throw new BadRequestException('Datos de perfil de Google no válidos');
+    }
+
     const { payload_access, payload_refresh, permissions } =
       await this.credencialesService.googleRegisterOrLogin(profileData);
 
     const accessToken = `Bearer ${await this.authService.createAccessToken(payload_access)}`;
     const refreshToken = `Bearer ${await this.authService.createRefreshToken(payload_refresh)}`;
-    const permissionsString = permissions.join(','); // Convertir array a string
+    const permissionsString = permissions.join(',');
 
     res.cookie(tipo_cookie[0].name_cookie, refreshToken, {
       httpOnly: true,

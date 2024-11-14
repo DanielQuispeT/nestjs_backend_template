@@ -5,7 +5,7 @@
 En esta sección se documentará la creación de dos módulos fundamentales para la aplicación:
 
 > [**Módulo de autenticación**](#4-módulo-de-autenticación): Permite a los usuarios autenticarse mediante email y contraseña o Google.
->
+
 > [**Módulo de roles y permisos**](#5-módulo-de-roles-y-permisos): Administra los roles de los usuarios y los permisos que estos poseen dentro de la aplicación.
 
 Ambos módulos son esenciales para gestionar la seguridad y control de acceso de la aplicación, y comparten muchas librerías en común para la gestión de autenticación, validación y bases de datos.
@@ -238,14 +238,6 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 - **jwt.strategy.ts:** Estrategia de autenticación con JWT, se encarga de validar el token JWT y devolver la información del usuario. Se encuentra [src/auth/strategies/jwt.strategy.ts](./src/auth/strategies/jwt.strategy.ts).
 
 ### 4.7. Archivos de utils
-
-- **constants.ts:** Define las constantes de JWT.
-
-```typescript
-export const jwtConstants = {
-  secret: process.env.JWT_SECRET_KEY_ACCESS,
-};
-```
 
 - **cookie.util.ts:** Define funciones de utilidad para manejar las cookies. Se encarga de limpiar y establecer las cookies de refresco de JWT. Se encuentra [src/auth/utils/cookie.util.ts](./src/auth/utils/cookie.util.ts).
 

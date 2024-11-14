@@ -1,12 +1,11 @@
 import { Module } from '@nestjs/common';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { MailService } from './mail.service';
-import { join } from 'path';
-import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+import { getMailConfig, OAuth2Service } from './oauth2.service';
 
 @Module({
   imports: [
-    MailerModule.forRootAsync({
+    /*MailerModule.forRootAsync({
       useFactory: () => ({
         transport: {
           host: 'smtp.gmail.com',
@@ -33,6 +32,12 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
           },
         },
       }),
+    }),*/
+    MailerModule.forRootAsync({
+      useFactory: async () => {
+        const oauth2Service = new OAuth2Service(); // Instancia directamente aquí
+        return await getMailConfig(oauth2Service);
+      },
     }),
   ],
   providers: [MailService],

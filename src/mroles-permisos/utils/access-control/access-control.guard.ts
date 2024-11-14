@@ -10,7 +10,7 @@ import { Permiso } from 'src/mroles-permisos/permisos/entities/permiso.entity';
 import { PersonaPermisoPersonalizado } from 'src/mroles-permisos/persona_permisos_personalizado/entities/persona_permisos_personalizado.entity';
 import { AccionPermiso } from '../roles-permisos.enum';
 import { GqlExecutionContext } from '@nestjs/graphql';
-import { IS_PUBLIC_KEY } from 'src/common/decorators/key-decorators.constant';
+import { IS_PUBLIC_KEY } from 'src/common/constants/key-decorators.constant';
 import { PermisosService } from 'src/mroles-permisos/permisos/permisos.service';
 import { PersonaPermisosPersonalizadoService } from 'src/mroles-permisos/persona_permisos_personalizado/persona_permisos_personalizado.service';
 import { PersonasRolesService } from 'src/mroles-permisos/personas_roles/personas_roles.service';
